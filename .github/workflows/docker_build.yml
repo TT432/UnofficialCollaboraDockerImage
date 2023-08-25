@@ -1,0 +1,24 @@
+name: Build Docker Image and Save as Artifact
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: |
+        docker build -t collabora-docker:1 .
+        docker save -o collabora-docker.tar collabora-docker:latest
+
+    - name: Upload Docker image as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: collabora-docker
+        path: collabora-docker.tar

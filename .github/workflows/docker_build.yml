@@ -14,7 +14,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t collabora-docker:1 .
+        docker build -t collabora-docker:latest .
         docker save -o collabora-docker.tar collabora-docker:latest
 
     - name: Upload Docker image as artifact
